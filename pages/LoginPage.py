@@ -10,6 +10,7 @@ class LoginPage(PageObject):
     btn_login = 'btnLogin'
 
     btn_new_customer = '.menusubnav li:nth-child(2)'
+    btn_delete_customer = '.menusubnav li:nth-child(4)'
 
     def __init__(self, browser):
         super(LoginPage, self).__init__(browser=browser)
@@ -35,3 +36,5 @@ class LoginPage(PageObject):
 
     def click_menu_new_customer(self):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_new_customer).click()
+
+

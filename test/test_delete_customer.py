@@ -1,11 +1,12 @@
 import time
 
+from pages.DeleteCustomer import DeleteCustomerPage
 from pages.NewCustomerPage import NewCustomerPage
 
 from faker import Faker
 
 
-class Test1:
+class Test2:
 
     def test_new_customer(self, open_login_page):
 
@@ -29,6 +30,13 @@ class Test1:
         )
 
         new_customer_page.click_btn_submit_customer()
+        customer_id = new_customer_page.get_customer_id()
 
-        assert new_customer_page.get_text_sucess(), 'Mensagem de sucesso não encontrado'
-        assert new_customer_page.get_customer_id(), 'Customer ID não foi criado com sucesso'
+        delete_customer_page = DeleteCustomerPage(login_page.driver)
+        delete_customer_page.click_menu_delete_customer()
+        delete_customer_page.delete_customer_from_id(customer_id)
+
+        time.sleep(100)
+
+
+
