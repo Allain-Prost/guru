@@ -1,5 +1,7 @@
 import time
 
+from selenium.webdriver.support import expected_conditions, wait
+
 from pages.DeleteCustomer import DeleteCustomerPage
 from pages.NewCustomerPage import NewCustomerPage
 
@@ -8,7 +10,7 @@ from faker import Faker
 
 class Test2:
 
-    def test_new_customer(self, open_login_page):
+    def test_delete_customer(self, open_login_page):
 
         fake = Faker()
 
@@ -32,11 +34,16 @@ class Test2:
         new_customer_page.click_btn_submit_customer()
         customer_id = new_customer_page.get_customer_id()
 
+        print(customer_id)
+
         delete_customer_page = DeleteCustomerPage(login_page.driver)
         delete_customer_page.click_menu_delete_customer()
         delete_customer_page.delete_customer_from_id(customer_id)
 
-        time.sleep(100)
+        alert = delete_customer_page.driver.switch_to.alert
+        alert.accept()
 
+        alert_ok = delete_customer_page.driver.switch_to.alert
+        alert_ok.dismiss()
 
-
+        time.sleep(5)
