@@ -6,7 +6,7 @@ from pages.NewCustomerPage import NewCustomerPage
 
 class Test3:
 
-    def test_delete_customer(self, open_login_page):
+    def test_edit_customer(self, open_login_page):
 
         fake = Faker()
 
@@ -29,8 +29,6 @@ class Test3:
 
         new_customer_page.click_btn_submit_customer()
         customer_id = new_customer_page.get_customer_id()
-
-        print(customer_id)
 
         edit_customer_page = EditCustomerPage(login_page.driver)
         edit_customer_page.click_menu_edit_customer()
