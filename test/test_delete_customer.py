@@ -31,8 +31,6 @@ class Test2:
         new_customer_page.click_btn_submit_customer()
         customer_id = new_customer_page.get_customer_id()
 
-        print(customer_id)
-
         delete_customer_page = DeleteCustomerPage(login_page.driver)
         delete_customer_page.click_menu_delete_customer()
         delete_customer_page.delete_customer_from_id(customer_id)
