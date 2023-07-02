@@ -1,6 +1,3 @@
-import time
-
-from selenium.webdriver.support import expected_conditions, wait
 
 from pages.DeleteCustomer import DeleteCustomerPage
 from pages.NewCustomerPage import NewCustomerPage
@@ -45,5 +42,3 @@ class Test2:
 
         alert_ok = delete_customer_page.driver.switch_to.alert
         alert_ok.dismiss()
-
-        time.sleep(5)
