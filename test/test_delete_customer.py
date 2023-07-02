@@ -1,5 +1,5 @@
 
-from pages.DeleteCustomer import DeleteCustomerPage
+from pages.DeleteCustomerPage import DeleteCustomerPage
 from pages.NewCustomerPage import NewCustomerPage
 
 from faker import Faker
