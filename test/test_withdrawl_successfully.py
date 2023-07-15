@@ -1,12 +1,14 @@
-from pages.DeleteCustomerPage import DeleteCustomerPage
+from pages.NewAccountPage import NewAccountPage
 from pages.NewCustomerPage import NewCustomerPage
 
 from faker import Faker
 
+from pages.WithdrawalPage import WithdrawalPage
 
-class Test2:
 
-    def test_delete_customer(self, open_login_page):
+class Test6:
+
+    def test_withdrawal_successfully(self, open_login_page):
 
         fake = Faker()
 
@@ -24,19 +26,19 @@ class Test2:
             '456321',
             '83909138123',
             fake.email(),
-            'Ohomemdeferro12'
+            'loucoucoasd213'
         )
 
         new_customer_page.click_btn_submit_customer()
         customer_id = new_customer_page.get_customer_id()
 
-        delete_customer_page = DeleteCustomerPage(login_page.driver)
-        delete_customer_page.click_menu_delete_customer()
-        delete_customer_page.delete_customer_from_id(customer_id)
+        new_account_page = NewAccountPage(login_page.driver)
+        new_account_page.preencher_new_account_form(customer_id, 100000)
+        account_id = new_account_page.get_account_id()
 
-        alert = delete_customer_page.accept_alert()
-        alert.accept()
+        withdrawal_page = WithdrawalPage(login_page.driver)
+        withdrawal_page.preacher_amount_withdrawal_form(account_id, 100, 'sacando 100 reais')
 
-        alert_text = delete_customer_page.get_text_alert()
+        text_success = withdrawal_page.get_text_success()
 
-        assert "Customer deleted successfully!!!" in alert_text
+        assert "Transaction details of Withdrawal for Account " + account_id in text_success

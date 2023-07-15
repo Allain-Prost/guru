@@ -18,3 +18,10 @@ class DeleteCustomerPage(PageObject):
         self.driver.find_element(By.NAME, self.loc_customer_id).click()
         self.driver.find_element(By.NAME, self.loc_customer_id).send_keys(customer_id)
         self.driver.find_element(By.NAME, self.btn_submit).click()
+
+    def get_text_alert(self):
+        alert_text = self.driver.switch_to.alert.text
+        return alert_text
+
+    def accept_alert(self):
+        return self.driver.switch_to.alert

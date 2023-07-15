@@ -3,10 +3,12 @@ from pages.NewCustomerPage import NewCustomerPage
 
 from faker import Faker
 
+from pages.WithdrawalPage import WithdrawalPage
 
-class Test4:
 
-    def test_new_account(self, open_login_page):
+class Test7:
+
+    def test_withdrawal_successfully(self, open_login_page):
 
         fake = Faker()
 
@@ -17,14 +19,14 @@ class Test4:
         new_customer_page = NewCustomerPage(login_page.driver)
         new_customer_page.preencher_formulario_customer(
             fake.name(),
-            '10102000',
-            'Rua nova conta',
-            'Para',
-            'Para',
-            '45631321',
-            '8390919938123',
+            '10101998',
+            'Rua Feliz da vida',
+            'Joao Pessoa',
+            'Paraiba',
+            '456321',
+            '83909138123',
             fake.email(),
-            'Ohomemdeferro12'
+            'lasdad1031'
         )
 
         new_customer_page.click_btn_submit_customer()
@@ -32,7 +34,11 @@ class Test4:
 
         new_account_page = NewAccountPage(login_page.driver)
         new_account_page.preencher_new_account_form(customer_id, 1000)
+        account_id = new_account_page.get_account_id()
 
-        assert new_account_page.get_text_sucess(), 'Account não foi gerado com sucesso'
+        withdrawal_page = WithdrawalPage(login_page.driver)
+        withdrawal_page.preacher_amount_withdrawal_form(account_id, 10000, 'sacando 10000 reais')
 
+        text_failure = withdrawal_page.get_text_failure()
 
+        assert "Transaction Failed. Account Balance Low!!!" in text_failure

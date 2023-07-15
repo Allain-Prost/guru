@@ -5,7 +5,10 @@ from pages.PageObject import PageObject
 
 class NewAccountPage(PageObject):
     btn_new_account = '.menusubnav li:nth-child(5)'
+    btn_fund_transfer = '.menusubnav li:nth-child(10)'
+    btn_new_customer = '.menusubnav li:nth-child(2)'
     customer_id = "//input[@name='cusid']"
+    account_id = "//*[@id='account']//tr/td[contains(.,'Account ID')]/../td[2]"
     account_type = "select[name='selaccount']"
     type_savings = "option[value='Savings']"
     initial_deposit = "input[name='inideposit']"
@@ -17,6 +20,12 @@ class NewAccountPage(PageObject):
 
     def click_menu_new_account(self):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_new_account).click()
+
+    def click_menu_fund_transfer(self):
+        self.driver.find_element(By.CSS_SELECTOR, self.btn_fund_transfer).click()
+
+    def click_menu_new_customer(self):
+        self.driver.find_element(By.CSS_SELECTOR, self.btn_new_customer).click()
 
     def preencher_new_account_form(self, customer_id, initial_deposit):
         self.click_menu_new_account()
@@ -31,3 +40,7 @@ class NewAccountPage(PageObject):
     def get_text_sucess(self):
         text_sucess = self.driver.find_element(By.CSS_SELECTOR, self.menssage_success).text
         return text_sucess
+
+    def get_account_id(self):
+        id_account = self.driver.find_element(By.XPATH, self.account_id).text
+        return id_account
