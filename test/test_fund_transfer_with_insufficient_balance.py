@@ -1,5 +1,3 @@
-import time
-
 from pages.FundTransferPage import FundTransferPage
 from pages.NewAccountPage import NewAccountPage
 from pages.NewCustomerPage import NewCustomerPage
@@ -66,5 +64,3 @@ class Test9:
         text_failure = fund_transfer_page.get_text_failure()
 
         assert "Transfer Failed. Account Balance low!!" in text_failure
-
-        time.sleep(2)
